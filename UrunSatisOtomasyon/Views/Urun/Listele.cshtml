@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Listele";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using UrunSatisOtomasyon.Models
+@{
+    Layout = null;
+}
+
+@model IEnumerable<Urun>
+
+<h2>Ürün Listele</h2>
+<table style="border:1px solid black">
+    <thead>
+        <tr>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Kategori</th>
+            <th>Fiyat</th>
+            <th>ÜrünKodu</th>
+        </tr>
+
+    </thead>
+    <tbody style="">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UrunMarka</td>
+                <td>@item.UrunModel</td>
+                <td>@item.UrunKategori</td>
+                <td>@item.UrunFiyat</td>
+                <td>@item.UrunKod</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

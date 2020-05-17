@@ -1,0 +1,32 @@
+﻿@model UrunSatisOtomasyon.Models.Personel
+@{
+    ViewBag.Title = "Duzenle";
+}
+
+<h2>Personel Bilgileri Düzenleme İşlemi</h2>
+
+@using (Html.BeginForm("Duzenle", "Personel", FormMethod.Post))
+{
+    @Html.HiddenFor(p => p.PersonelId)
+    <form method="post" class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(p => p.Ad)
+            @Html.TextBoxFor(p => p.Ad, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Soyad)
+            @Html.TextBoxFor(p => p.Soyad, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Numara)
+            @Html.TextBoxFor(p => p.Numara, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Tc)
+            @Html.TextBoxFor(p => p.Tc, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" />
+    </form>
+}
+

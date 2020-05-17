@@ -1,0 +1,123 @@
+﻿@using UrunSatisOtomasyon.Models.ViewsModels
+@model PersonelViewModel
+
+
+<h3>Personel Listesi</h3>
+
+<a href="/Personel/Ekle" class="btn btn-primary">Personel Ekle</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Numara</th>
+            <th>Tc</th>
+            <th>İşlemler</th>
+        </tr>
+
+    </thead>
+    <tbody style="">
+        @foreach (var item in Model.Personeler)
+        {
+            <tr>
+                <td>@item.PersonelId</td>
+                <td>@item.Ad</td>
+                <td>@item.Soyad</td>
+                <td>@item.Numara</td>
+                <td>@item.Tc</td>
+                <td><a href="/Personel/Duzenle/@item.PersonelId" class="btn btn-sm btn-primary">Düzenle</a> <a href="/Personel/Sil/@item.PersonelId" class="btn btn-sm btn-danger" onclick="return confirm('Bu Personeli silmek istediğinizden emin misiniz?')">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@*<div class="modal fade" id="mdlPersonelEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" class="form-group">
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Per.Ad)
+                        @Html.TextBoxFor(p => p.Per.Ad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.Per.Ad)
+                        <label id="lblAdHata" style="display:none;color:red">Client Side Hata - Ad</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Per.Soyad)
+                        @Html.TextBoxFor(p => p.Per.Soyad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.Per.Soyad)
+                        <label id="lblSoyadHata" style="display:none;color:red">Client Side Hata - Soyad</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Per.Tc)
+                        @Html.TextBoxFor(p => p.Per.Tc, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.Per.Tc)
+                        <label id="lblTcHata" style="display:none;color:red">Client Side Hata - Tc</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Per.Numara)
+                        @Html.TextBoxFor(p => p.Per.Numara, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.Per.Numara)
+                        <label id="lblNumaraHata" style="display:none;color:red">Client Side Hata - Numara</label>
+                    </div>
+
+
+                    <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" onclick="PersonelEkle()" />
+                </div>
+            </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Kaydet</button>
+                </div>
+        </div>
+    </div>
+</div>*@
+
+@section scripts{
+    <script>
+        function BoslukKontrol() {
+            var hatayok = true;
+            if ($("#Ad").val() == "" || $("#Soyad").val() == "") || $("#Numara").val() == "")|| $("#Tc").val() == "") {
+                $("#lblAdHata").show(),
+                $("#lblSoyadHata").show(),
+                $("#lblNumaraHata").show(),
+                $("#lblTcHata").show()
+
+                hatayok = false;
+            }
+            return hatayok;
+        }
+
+        function PersonelEkle() {
+
+            $.ajax({
+                url: "/Personel/Ekle",
+                method: "Post",
+                data: {
+                    Ad: $("#Per_Ad").val(),
+                    Soyad: $("#Per_Soyad").val(),
+                    Numara: $("#Per_Numara").val()
+                    Tc: $("#Per_Tc").val()
+                },
+                success: function (data) {
+
+                    if (data == "True") {
+                        alert("İşlem başarılı");
+                    } else {
+                        alert("Ekleme işleminde hata");
+                    }
+                }
+
+            });
+        }
+    </script>
+}

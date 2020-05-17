@@ -1,0 +1,134 @@
+﻿@using UrunSatisOtomasyon.Models.ViewsModels
+@model UrunViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Listesi</h2>
+
+<a href="/Urun/Ekle" class="btn btn-primary">Urun Ekle</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Kategori</th>
+            <th>Fiyat</th>
+            <th>Barkod</th>
+        </tr>
+
+    </thead>
+    <tbody style="">
+        @foreach (var item in Model.Urunler)
+        {
+            <tr>
+                <td>@item.UrunId</td>
+                <td>@item.UrunMarka</td>
+                <td>@item.UrunModel</td>
+                <td>@item.UrunKategori</td>
+                <td>@item.UrunFiyat</td>
+                <td>@item.UrunKod</td>
+                <td><a href="/Urun/Duzenle/@item.UrunId" class="btn btn-sm btn-primary">Düzenle</a> <a href="/Urun/Sil/@item.UrunId" class="btn btn-sm btn-danger" onclick="return confirm('Bu Ürünü silmek istediğinizden emin misiniz?')">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@*<div class="modal fade" id="mdlPersonelEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" class="form-group">
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.urn.UrunMarka)
+                        @Html.TextBoxFor(p => p.urn.UrunMarka, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.urn.UrunMarka)
+                        <label id="lblUrunMarkaHata" style="display:none;color:red">Client Side Hata - Marka</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.urn.UrunModel)
+                        @Html.TextBoxFor(p => p.urn.UrunModel, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.urn.UrunModel)
+                        <label id="lblUrunModelHata" style="display:none;color:red">Client Side Hata - Model</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.urn.UrunKategori)
+                        @Html.TextBoxFor(p => p.urn.UrunKategori, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.urn.UrunKategori)
+                        <label id="lblUrunKategoriHata" style="display:none;color:red">Client Side Hata - Kategori</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.urn.UrunFiyat)
+                        @Html.TextBoxFor(p => p.urn.UrunFiyat, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.urn.UrunFiyat)
+                        <label id="lblUrunFiyatHata" style="display:none;color:red">Client Side Hata - UrunFiyat</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.urn.UrunKod)
+                        @Html.TextBoxFor(p => p.urn.UrunKod, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.urn.UrunKod)
+                        <label id="lblUrunKodHata" style="display:none;color:red">Client Side Hata - UrunKod</label>
+                    </div>
+
+
+                    <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" onclick="PersonelEkle()" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>*@
+
+@section scripts{
+    <script>
+        function BoslukKontrol() {
+            var hatayok = true;
+            if ($("#UrunMarka").val() == "" || $("#UrunModel").val() == "") || $("#UrunKategori").val() == "")|| $("#UrunFiyat").val() == "")|| $("#UrunKod").val() == "") {
+                $("#lblUrunMarkaHata").show();
+                $("#lblUrunModelHata").show();
+                $("#lblUrunKategoriHata").show();
+                $("#lblUrunFiyatHata").show();
+                $("#lblUrunKodHata").show();
+
+                hatayok = false;
+            }
+            return hatayok;
+        }
+        function PersonelEkle() {
+
+            $.ajax({
+                url: "/Urun/Ekle",
+                method: "Post",
+                data: {
+                    Marka: $("#urn_Marka").val(),
+                    Model: $("#urn_Model").val(),
+                    Kategori: $("#urn_Kategori").val(),
+                    Fiyat: $("#urn_Fiyat").val(),
+                    Barkod: $("#urn_Barkod").val()
+                },
+                success: function (data) {
+
+                    if (data == "True") {
+                        alert("İşlem başarılı");
+                    } else {
+                        alert("Ekleme işleminde hata");
+                    }
+                }
+
+            });
+        }
+    </script>
+}

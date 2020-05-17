@@ -1,0 +1,36 @@
+﻿@model UrunSatisOtomasyon.Models.Urun
+@{
+    ViewBag.Title = "Duzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Düzenle</h2>
+
+@using (Html.BeginForm("Duzenle", "Urun", FormMethod.Post))
+{
+    @Html.HiddenFor(p => p.UrunId)
+    <form method="post" class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(p => p.UrunMarka)
+            @Html.TextBoxFor(p => p.UrunMarka, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.UrunModel)
+            @Html.TextBoxFor(p => p.UrunModel, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.UrunKategori)
+            @Html.TextBoxFor(p => p.UrunKategori, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.UrunFiyat)
+            @Html.TextBoxFor(p => p.UrunFiyat, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.UrunKod)
+            @Html.TextBoxFor(p => p.UrunKod, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" />
+    </form>
+}

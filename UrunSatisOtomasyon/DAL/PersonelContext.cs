@@ -16,6 +16,7 @@ namespace UrunSatisOtomasyon.DAL
 
         public DbSet<Personel> Personeler { get; set; }
         public DbSet<Urun> Urunler { get; set; }
+        public DbSet<Kullanici> Kullanicilar { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,6 +31,9 @@ namespace UrunSatisOtomasyon.DAL
             modelBuilder.Entity<Urun>().Property(p => p.UrunKategori).HasColumnType("varchar").HasMaxLength(75).IsRequired();
             modelBuilder.Entity<Urun>().Property(p => p.UrunFiyat).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Urun>().Property(p => p.UrunKod).HasColumnType("varchar").HasMaxLength(75).IsRequired();
+            modelBuilder.Entity<Kullanici>().ToTable("tblKullanici");
+            modelBuilder.Entity<Kullanici>().Property(o => o.Ad).HasMaxLength(20).IsRequired().HasColumnType("varchar");
+            modelBuilder.Entity<Kullanici>().Property(o => o.Sifre).HasMaxLength(25).IsRequired().HasColumnType("varchar");
         }
     }
 }

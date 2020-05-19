@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace UrunSatisOtomasyon.Controllers
 {
+    [Authorize]
     public class UrunController : Controller
     {
         PersonelContext ctx = new PersonelContext();

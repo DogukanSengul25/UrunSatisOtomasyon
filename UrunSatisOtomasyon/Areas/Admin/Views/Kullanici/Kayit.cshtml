@@ -1,0 +1,47 @@
+﻿@model UrunSatisOtomasyon.Models.Kullanici
+
+@{
+    ViewBag.Title = "Kayıt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kayıt</h2>
+
+@using (Html.BeginForm("Kayit", "Kullanici", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Ad);
+        @Html.TextBoxFor(o => o.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Ad)
+        <label id="lblAdHata" style="display:none;color:red">Ad alanı boş olamaz</label>
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.Sifre);
+        @Html.TextBoxFor(o => o.Sifre, new { @type = "password", @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Sifre)
+        <label id="lblHata" style="display:none;color:red">Şifre alanı boş olamaz</label>
+
+    </div>
+    <input type="submit" name="btnKaydet" value="Kaydol" class="btn btn-danger" onclick="return BoslukKontrol()" />
+
+}
+
+@section scripts{
+    <script>
+       function BoslukKontrol() {
+           var hatayok = true;
+           if ($("#Ad").val() == ""||$("#Sifre").val() == "") {
+               $("#lblAdHata").show();
+               $("#lblHata").show();
+               hatayok = false;
+           }
+
+           return hatayok;
+       }
+
+    </script>
+
+}
+

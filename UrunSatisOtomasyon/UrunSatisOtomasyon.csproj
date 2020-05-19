@@ -3949,6 +3949,11 @@
     <Content Include="ckfinder\lang\zh-tw.json" />
     <Content Include="ckfinder\plugins\README.md" />
     <Content Include="ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Giris\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Kullanici\Kayit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3966,6 +3971,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\GirisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="DAL\PersonelContext.cs" />
@@ -3973,7 +3981,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Kullanici.cs" />
     <Compile Include="Models\Personel.cs" />
     <Compile Include="Models\Urun.cs" />
     <Compile Include="Models\ViewsModels\PersonelViewModel.cs" />
@@ -4005,6 +4013,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="ckfinder\core\connector\php\vendor\cksource\ckfinder\.git\branches\" />
     <Folder Include="ckfinder\core\connector\php\vendor\cksource\ckfinder\.git\refs\tags\" />
     <Folder Include="ckfinder\core\connector\php\vendor\league\flysystem-azure\.git\branches\" />
